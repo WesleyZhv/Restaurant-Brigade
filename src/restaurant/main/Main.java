@@ -1,10 +1,13 @@
 package restaurant.main;
 
+import java.util.*;
 import restaurant.model.personnel.Cuisinier;
 import restaurant.model.personnel.Manager;
 import restaurant.model.personnel.cuisine.*;
 import restaurant.model.personnel.management.*;
 import restaurant.model.Brigade;
+import restaurant.model.plat.Plat;
+import restaurant.model.plat.StatutPlat;
 
 public class Main {
     public static void main(String[] args){
@@ -50,6 +53,17 @@ public class Main {
         System.out.println("Voici les rôles en administration :");
         System.out.println(" ");
         brigadeAdmin.afficherBrigade();
+
+        Plat plat1 = new Plat("Lasagne", 230, List.of("Pâte","Viande", "Tomate", "Oignon", "Carotte", "Celeris branche", "Vin rouge", "Carotte", "Béchamel"));
+
+        //2 Status différent grâce au Enum
+        System.out.println(plat1.toString());
+        plat1.setStatut(StatutPlat.PRET);
+
+        System.out.println(plat1.toString());
+
+
+
 
 
 
