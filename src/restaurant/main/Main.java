@@ -8,6 +8,7 @@ import restaurant.model.personnel.management.*;
 import restaurant.model.Brigade;
 import restaurant.model.plat.Plat;
 import restaurant.model.plat.StatutPlat;
+import restaurant.model.service.Service;
 
 public class Main {
     public static void main(String[] args){
@@ -61,6 +62,19 @@ public class Main {
         plat1.setStatut(StatutPlat.PRET);
 
         System.out.println(plat1.toString());
+
+        //Test de ma class Service qui utilise, list, queue et LinkedList
+        Service serv = new Service("Service du soir", brigadeCuisine);
+        Plat plat2 = new Plat("Crêpe au fromage", 20, List.of("Farine", "Oeuf", "Lait", "Fromage", "Sel"));
+
+        serv.ajouterCommande(plat1);
+        serv.ajouterCommande(plat2);
+
+        serv.afficherEtatService();
+        serv.traiterProchaineCommande();
+
+        serv.afficherEtatService();
+
 
 
 
