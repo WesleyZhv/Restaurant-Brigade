@@ -4,6 +4,7 @@ import restaurant.model.personnel.Cuisinier;
 import restaurant.model.Brigade;
 import restaurant.model.plat.Plat;
 import restaurant.model.plat.StatutPlat;
+import restaurant.exception.ServiceSurchargeException;
 
 import java.util.*;
 
@@ -26,7 +27,10 @@ public class Service {
         commandes.offer(plat);
     }
 
-    public void traiterProchaineCommande() {
+    public void traiterProchaineCommande() throws ServiceSurchargeException {
+        if(commandes.size() > 10 ){
+            throw new ServiceSurchargeException("Il y'a trop de commandes");
+        }
         Plat plat = commandes.poll();
         if (plat != null) {
             plat.setStatut(StatutPlat.PRET);

@@ -9,6 +9,7 @@ import restaurant.model.Brigade;
 import restaurant.model.plat.Plat;
 import restaurant.model.plat.StatutPlat;
 import restaurant.model.service.Service;
+import restaurant.exception.ServiceSurchargeException;
 
 public class Main {
     public static void main(String[] args){
@@ -63,7 +64,7 @@ public class Main {
 
         System.out.println(plat1.toString());
 
-        //Test de ma class Service qui utilise, list, queue et LinkedList
+        //Test de ma class Service qui utilise, list, queue et LinkedList ET test Exception
         Service serv = new Service("Service du soir", brigadeCuisine);
         Plat plat2 = new Plat("Crêpe au fromage", 20, List.of("Farine", "Oeuf", "Lait", "Fromage", "Sel"));
 
@@ -71,7 +72,13 @@ public class Main {
         serv.ajouterCommande(plat2);
 
         serv.afficherEtatService();
-        serv.traiterProchaineCommande();
+
+        try{
+            serv.traiterProchaineCommande();
+        }
+        catch(ServiceSurchargeException e){
+            System.out.println(e.getMessage());
+        }
 
         serv.afficherEtatService();
 
