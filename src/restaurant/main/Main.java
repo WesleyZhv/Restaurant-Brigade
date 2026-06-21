@@ -10,6 +10,8 @@ import restaurant.model.plat.Plat;
 import restaurant.model.plat.StatutPlat;
 import restaurant.model.service.Service;
 import restaurant.exception.ServiceSurchargeException;
+import restaurant.exception.PlatIndisponibleException;
+import restaurant.exception.PersonnelAbsentException;
 
 public class Main {
     public static void main(String[] args){
@@ -61,10 +63,9 @@ public class Main {
         //2 Status différent grâce au Enum
         System.out.println(plat1.toString());
         plat1.setStatut(StatutPlat.PRET);
-
         System.out.println(plat1.toString());
 
-        //Test de ma class Service qui utilise, list, queue et LinkedList ET test Exception
+        //Test de la class Service qui utilise, list, queue et LinkedList ET test Exception
         Service serv = new Service("Service du soir", brigadeCuisine);
         Plat plat2 = new Plat("Crêpe au fromage", 20, List.of("Farine", "Oeuf", "Lait", "Fromage", "Sel"));
 
@@ -82,9 +83,33 @@ public class Main {
 
         serv.afficherEtatService();
 
+        //2eme Test pour 2eme Exception
 
+        List<String> stock = List.of("Pâte", "Viande", "Tomate");
 
+        try {
+            plat1.verifierDisponibilite(stock);
+        }
+        catch(PlatIndisponibleException e){
+            System.out.println(e.getMessage());
+        }
 
+        //3eme et dernière exception
+
+        //Rien ne se passe dans la console car Chef de cuisine existe
+        try {
+            brigadeCuisine.verifierPosteCouvert("Chef de cuisine");
+        }
+        catch(PersonnelAbsentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            brigadeCuisine.verifierPosteCouvert(" Plongeur");
+        }
+        catch(PersonnelAbsentException e){
+            System.out.println(e.getMessage());
+        }
 
 
 

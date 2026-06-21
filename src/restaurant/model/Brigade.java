@@ -2,6 +2,8 @@ package restaurant.model;
 
 import restaurant.model.personnel.Personnel;
 import java.util.*;
+import restaurant.exception.PersonnelAbsentException;
+import restaurant.model.personnel.Cuisinier;
 
 public class Brigade<T extends Personnel>{
 
@@ -40,7 +42,20 @@ public class Brigade<T extends Personnel>{
             }
         }
         return null;
-
     }
 
+    public void verifierPosteCouvert(String poste) throws PersonnelAbsentException{
+        boolean posteTrouve = false;
+        for(int i = 0; i < membres.size(); i++){
+            if(membres.get(i) instanceof Cuisinier) {
+                Cuisinier cuisinier = (Cuisinier) membres.get(i);
+                if(cuisinier.getPoste().equals(poste)) {
+                    posteTrouve = true;
+                }
+            }
+        }
+        if(!posteTrouve) {
+            throw new PersonnelAbsentException("Aucun membre du personnel à ce poste" + poste);
+        }
+    }
 }

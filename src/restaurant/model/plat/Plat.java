@@ -1,6 +1,7 @@
 package restaurant.model.plat;
 
 import java.util.*;
+import restaurant.exception.PlatIndisponibleException;
 
 public class Plat {
 
@@ -41,6 +42,14 @@ public List<String> getIngredients() {
 }
     public StatutPlat getStatut(){
         return this.status;
+    }
+
+    public void verifierDisponibilite(List<String> stockDisponible) throws PlatIndisponibleException{
+        for (int i = 0; i < this.ingredients.size(); i++) {
+            if (!stockDisponible.contains(ingredients.get(i))) {
+                throw new PlatIndisponibleException("Le plat suivant est indisponible : " + ingredients.get(i));
+            }
+        }
     }
 
     @Override
