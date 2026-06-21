@@ -12,6 +12,7 @@ import restaurant.model.service.Service;
 import restaurant.exception.ServiceSurchargeException;
 import restaurant.exception.PlatIndisponibleException;
 import restaurant.exception.PersonnelAbsentException;
+import restaurant.storage.GestionnaireJson;
 
 public class Main {
     public static void main(String[] args){
@@ -110,6 +111,11 @@ public class Main {
         catch(PersonnelAbsentException e){
             System.out.println(e.getMessage());
         }
+
+        //Utilisation de Json pour enregistré un plat
+        GestionnaireJson gestionnaire = new GestionnaireJson();
+
+        gestionnaire.sauvegarderPlat(plat1, "plat1.json");
 
 
 
