@@ -117,6 +117,10 @@ public class Main {
 
         gestionnaire.sauvegarderPlat(plat1, "plat1.json");
 
+        //Utilisation d'une désérealisation
+
+        Plat platCharge = gestionnaire.chargerPlat("plat1.json");
+        System.out.println(platCharge);
 
 
     }
