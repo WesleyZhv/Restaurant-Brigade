@@ -122,7 +122,7 @@ public class Main {
         Plat platCharge = gestionnaire.chargerPlat("plat1.json");
         System.out.println(platCharge);
 
-        
+
         //gestionnaire.sauvegarderBrigade(brigadeCuisine, "brigade.json");
         //Brigade<Cuisinier> brigadeChargee = gestionnaire.chargerBrigade("brigade.json");
         //brigadeChargee.afficherBrigade();
