@@ -23,6 +23,14 @@ public class Service {
 
     }
 
+    public void setNom(String nom){
+        this.nomService = nom;
+    }
+
+    public String getNom(){
+        return this.nomService;
+    }
+
     public void ajouterCommande(Plat plat){
         commandes.offer(plat);
     }

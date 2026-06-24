@@ -81,8 +81,9 @@ public class App extends Application{
         Button btnAjouter = new Button("Ajouter un plat");
         Button btnConfirmer = new Button("Ajouter membre");
         Button btnSupprimer = new Button("Supprimer membre");
+        Button btnRapport = new Button("Clôturer le service");
 
-        HBox hbox = new HBox(10, btnTraiter, btnAjouter);
+        HBox hbox = new HBox(10, btnTraiter, btnAjouter, btnRapport);
         root.setBottom(hbox);
         hbox.setPadding(new Insets(10));
 
@@ -208,6 +209,31 @@ public class App extends Application{
                 details.setScene(detailsScene);
                 details.show();
             }
+        });
+
+        btnRapport.setOnAction(e ->{
+           Stage stage1 = new Stage();
+
+            ObservableList<String> platsTraites = FXCollections.observableArrayList();
+            for (Plat p : serv.getPlatsTermines()) {
+                platsTraites.add(p.getNom());
+            }
+            ListView<String> listePlatsTraites = new ListView<>(platsTraites);
+
+           Label lNomService = new Label("Nom du service : " + serv.getNom());
+           Label lNombrePlatTraite = new Label("Nombre de plat traité : " + serv.getPlatsTermines().size());
+
+           Label lMembre = new Label("Nombre de membres de la brigade : " + membres.size());
+
+           VBox rapportBox = new VBox(15, lNomService, lNombrePlatTraite, listePlatsTraites, lMembre );
+           rapportBox.setPadding(new Insets(20));
+
+            Scene rapportScene = new Scene(rapportBox, 350, 300);
+            stage1.setTitle("Rapport de service");
+            stage1.setScene(rapportScene);
+            stage1.show();
+
+
         });
 
     stage.show();
