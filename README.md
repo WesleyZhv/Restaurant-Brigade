@@ -69,9 +69,12 @@ mvn javafx:run
 ## Fonctionnalités de l'interface
 
 - Tableau de bord avec brigade complète (Nom, Poste, Rôle hiérarchique)
-- Liste des plats en cours de service
-- Ajout de commandes et traitement FIFO en temps réel via boutons
-
+- Formulaire d'ajout de cuisinier avec validation (TextField, ComboBox, Alert)
+- Suppression d'un membre sélectionné avec confirmation
+- Liste des plats en cours de service avec compteur en temps réel
+- Ajout de commandes et traitement FIFO via boutons
+- Fenêtre détails au double-clic sur un cuisinier (nouvelle Stage)
+- Rapport de fin de service (plats traités, membres de la brigade)
 ---
 
 *Projet en cours de développement — JavaFX Phase 3 active.*
