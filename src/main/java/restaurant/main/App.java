@@ -1,5 +1,6 @@
 package restaurant.main;
 
+import java.util.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -14,6 +15,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import restaurant.model.service.Service;
+import restaurant.model.plat.Plat;
+import restaurant.exception.ServiceSurchargeException;
+import restaurant.model.Brigade;
 
 public class App extends Application{
 
@@ -47,7 +54,8 @@ public class App extends Application{
         Scene scene = new Scene(root, 900,600);
         stage.setScene(scene);
 
-        //VBox
+
+        //VBox et HBox
         Label label = new Label();
         ListView<String> listePlats = new ListView<String>();
 
@@ -60,8 +68,34 @@ public class App extends Application{
         VBox vbox = new VBox(label, listePlats);
         root.setRight(vbox);
 
+        //Création de button
+        Button btnTraiter = new Button("Traiter commande");
+        Button btnAjouter = new Button("Ajouter un plat");
 
+        HBox hbox = new HBox(btnTraiter, btnAjouter);
+        root.setBottom(hbox);
 
+        //Creation de Service
+        Brigade<Cuisinier> brigade = new Brigade<>("Service du soir");
+        for(Cuisinier c : membres){
+            brigade.ajouterMembre(c);
+        }
+
+        Service serv = new Service("Service du soir", brigade);
+        btnTraiter.setOnAction(e ->{
+            try { serv.traiterProchaineCommande();
+                if(!plats.isEmpty()){
+                    plats.remove(0);
+                }
+                }catch(ServiceSurchargeException ex) {
+                System.out.println(ex.getMessage());
+            }});
+
+        btnAjouter.setOnAction(e ->{
+            Plat nouveau = new Plat("Plat test", 15, List.of("ingredients"));
+            serv.ajouterCommande(nouveau);
+            plats.add(nouveau.getNom() + "-" + nouveau.getStatut());
+        });
 
 
 
