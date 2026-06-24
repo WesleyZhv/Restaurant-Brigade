@@ -54,6 +54,7 @@ public class App extends Application{
         root.setCenter(tableau);
         Scene scene = new Scene(root, 900,600);
         stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 
 
         //VBox et HBox

@@ -1,0 +1,38 @@
+.root {
+    -fx-background-color: #1e1e2e;
+    -fx-font-family: "Arial";
+}
+
+.label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+}
+
+.table-view {
+    -fx-background-color: #2a2a3e;
+    -fx-text-fill: #ffffff;
+}
+
+.column-header {
+    -fx-background-color: #3a3a5e;
+    -fx-text-fill: #ffffff;
+}
+
+.button {
+    -fx-background-color: #4a90d9;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #357abd;
+}
+
+.list-view {
+    -fx-background-color: #2a2a3e;
+    -fx-text-fill: #ffffff;
+}
