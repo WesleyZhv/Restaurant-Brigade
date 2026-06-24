@@ -25,6 +25,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
+import javafx.scene.input.MouseEvent;
 
 public class App extends Application{
 
@@ -185,10 +186,29 @@ public class App extends Application{
               membres.remove(selectionne);
         }});
 
+        tableau.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 2) {
+                Cuisinier selectionne = tableau.getSelectionModel().getSelectedItem();
+                if (selectionne == null) return;
 
+                Stage details = new Stage();
+                details.setTitle("Détails — " + selectionne.getPrenom() + " " + selectionne.getNom());
 
+                // Crée un VBox avec les infos du cuisinier
+                Label lNom = new Label("Nom : " + selectionne.getNom());
+                Label lPrenom = new Label("Prénom : " + selectionne.getPrenom());
+                Label lPoste = new Label("Poste : " + selectionne.getPoste());
+                Label lNiveau = new Label("Niveau : " + selectionne.getNiveauExperience());
+                Label lRole = new Label("Rôle : " + selectionne.getClass().getSimpleName());
 
+                VBox detailsBox = new VBox(15, lNom, lPrenom, lPoste, lNiveau, lRole);
+                detailsBox.setPadding(new Insets(20));
 
+                Scene detailsScene = new Scene(detailsBox, 300, 250);
+                details.setScene(detailsScene);
+                details.show();
+            }
+        });
 
     stage.show();
     }
