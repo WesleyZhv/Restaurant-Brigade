@@ -71,7 +71,8 @@ public class App extends Application{
         );
         listePlats.setItems(plats);
 
-        VBox vbox = new VBox(10, label, listePlats);
+        Label compteur = new Label("Plats traités : 0");
+        VBox vbox = new VBox(10, label, listePlats, compteur);
         root.setRight(vbox);
 
         //Création de button
@@ -92,11 +93,15 @@ public class App extends Application{
         }
 
         Service serv = new Service("Service du soir", brigade);
+
         btnTraiter.setOnAction(e ->{
             try { serv.traiterProchaineCommande();
                 if(!plats.isEmpty()){
                     plats.remove(0);
                 }
+                int traites = serv.getPlatsTermines().size();
+                compteur.setText("Plats traités : " + traites);
+
                 }catch(ServiceSurchargeException ex) {
                 System.out.println(ex.getMessage());
             }});
@@ -174,7 +179,7 @@ public class App extends Application{
             Alert alert1 = new Alert(Alert.AlertType.WARNING);
             alert1.setTitle("Attention");
             alert1.setHeaderText("Sélectionnez un membre à supprimer");
-            alert1.setContentText("Veuillez remplir tous les champs.");
+            alert1.setContentText("Veuillez sélectionner un membre dans le tableau.");
             alert1.showAndWait();
         }else {
               membres.remove(selectionne);

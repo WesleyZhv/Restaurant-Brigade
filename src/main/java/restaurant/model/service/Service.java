@@ -43,6 +43,10 @@ public class Service {
             System.out.println("Commandes en attente : " + commandes.size());
             System.out.println("Plats terminés : " + platsTermines.size());
         }
+
+    public List<Plat> getPlatsTermines() {
+        return platsTermines;
+    }
 }
 
 
