@@ -22,6 +22,8 @@ import restaurant.model.plat.Plat;
 import restaurant.exception.ServiceSurchargeException;
 import restaurant.model.Brigade;
 import javafx.geometry.Insets;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 public class App extends Application{
 
@@ -74,10 +76,12 @@ public class App extends Application{
         //Création de button
         Button btnTraiter = new Button("Traiter commande");
         Button btnAjouter = new Button("Ajouter un plat");
+        Button btnConfirmer = new Button("Ajouter membre");
 
         HBox hbox = new HBox(10, btnTraiter, btnAjouter);
         root.setBottom(hbox);
         hbox.setPadding(new Insets(10));
+
 
         //Creation de Service
         Brigade<Cuisinier> brigade = new Brigade<>("Service du soir");
@@ -112,6 +116,39 @@ public class App extends Application{
 
         /* data.getValue() retourne l'objet Cuisinier de la ligne, et on appelle
         getClass().getSimpleName() dessus pour avoir son type exact. */
+
+        TextField champPrenom = new TextField();
+        TextField champNom = new TextField();
+        TextField champPoste = new TextField();
+
+        champPrenom.setPromptText("Prenom");
+        champNom.setPromptText("Nom");
+        champPoste.setPromptText("Poste");
+
+        ComboBox<String> roleBox = new ComboBox<>();
+        roleBox.getItems().addAll("ChefExecutif","SousChef","ChefDePartie","Commis");
+        roleBox.setPromptText("Choisir un rôle");
+
+        HBox formulaire = new HBox(10, champPrenom, champNom, champPoste, roleBox, btnConfirmer);
+        formulaire.setPadding(new Insets(10));
+        root.setTop(formulaire);
+
+        btnConfirmer.setOnAction(e -> {
+            String saisiePrenom = champPrenom.getText();
+            String saisieNom = champNom.getText();
+            String SaisiePoste = champPoste.getText();
+
+            switch (roleBox.getValue()){
+                case "ChefExecutif" -> membres.add(new ChefExecutif(saisieNom, saisiePrenom, SaisiePoste));
+                case "SousChef" -> membres.add(new SousChef(saisieNom, saisiePrenom, SaisiePoste));
+                case "ChefDePartie" -> membres.add(new ChefDePartie(saisieNom, saisiePrenom, SaisiePoste));
+                case "Commis" -> membres.add(new Commis(saisieNom, saisiePrenom, SaisiePoste));
+            }
+            champPrenom.clear();
+            champNom.clear();
+            champPoste.clear();
+            roleBox.setValue(null);
+                });
 
 
 
