@@ -24,6 +24,7 @@ import restaurant.model.Brigade;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
 
 public class App extends Application{
 
@@ -136,21 +137,32 @@ public class App extends Application{
         btnConfirmer.setOnAction(e -> {
             String saisiePrenom = champPrenom.getText();
             String saisieNom = champNom.getText();
-            String SaisiePoste = champPoste.getText();
+            String saisiePoste = champPoste.getText();
+
+                    if (saisiePrenom.isEmpty()
+                            || saisieNom.isEmpty()
+                            || saisiePoste.isEmpty()
+                            || roleBox.getValue() == null) {
+
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Attention");
+                        alert.setHeaderText("Champs manquants");
+                        alert.setContentText("Veuillez remplir tous les champs.");
+                        alert.showAndWait();
+                    return;
+                    }
 
             switch (roleBox.getValue()){
-                case "ChefExecutif" -> membres.add(new ChefExecutif(saisieNom, saisiePrenom, SaisiePoste));
-                case "SousChef" -> membres.add(new SousChef(saisieNom, saisiePrenom, SaisiePoste));
-                case "ChefDePartie" -> membres.add(new ChefDePartie(saisieNom, saisiePrenom, SaisiePoste));
-                case "Commis" -> membres.add(new Commis(saisieNom, saisiePrenom, SaisiePoste));
+                case "ChefExecutif" -> membres.add(new ChefExecutif(saisieNom, saisiePrenom, saisiePoste));
+                case "SousChef" -> membres.add(new SousChef(saisieNom, saisiePrenom, saisiePoste));
+                case "ChefDePartie" -> membres.add(new ChefDePartie(saisieNom, saisiePrenom, saisiePoste));
+                case "Commis" -> membres.add(new Commis(saisieNom, saisiePrenom, saisiePoste));
             }
             champPrenom.clear();
             champNom.clear();
             champPoste.clear();
             roleBox.setValue(null);
                 });
-
-
 
 
 
