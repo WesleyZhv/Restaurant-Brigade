@@ -10,6 +10,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import restaurant.model.personnel.cuisine.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.VBox;
 
 public class App extends Application{
 
@@ -25,10 +29,7 @@ public class App extends Application{
 
     tableau.getColumns().addAll(nom, poste);
 
-    Scene scene = new Scene(tableau, 600, 400);
-
-    stage.setScene(scene);
-
+        //Création de tableau
     ObservableList<Cuisinier> membres = FXCollections.observableArrayList();
         membres.add(new ChefExecutif("Morel", "Lucas", "Chef de cuisine"));
         membres.add(new SousChef("Vuillemin", "Emma", "Sous Cheffe de Cuisine"));
@@ -39,6 +40,25 @@ public class App extends Application{
         membres.add(new Commis("Piguet", "Laura", "Viandes"));
 
         tableau.setItems(membres);
+
+        //BorderPane
+        BorderPane root = new BorderPane();
+        root.setCenter(tableau);
+        Scene scene = new Scene(root, 900,600);
+        stage.setScene(scene);
+
+        //VBox
+        Label label = new Label();
+        ListView<String> listePlats = new ListView<String>();
+
+        ObservableList<String> plats = FXCollections.observableArrayList(
+                "Lasagne - EN_ATTENTE",
+                "Crêpe au fromage - EN_COURS"
+        );
+        listePlats.setItems(plats);
+
+        VBox vbox = new VBox(label, listePlats);
+        root.setRight(vbox);
 
 
 
