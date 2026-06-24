@@ -21,6 +21,7 @@ import restaurant.model.service.Service;
 import restaurant.model.plat.Plat;
 import restaurant.exception.ServiceSurchargeException;
 import restaurant.model.Brigade;
+import javafx.geometry.Insets;
 
 public class App extends Application{
 
@@ -57,6 +58,7 @@ public class App extends Application{
 
         //VBox et HBox
         Label label = new Label();
+        label.setText("KitchenFlow - Tableau de bord");
         ListView<String> listePlats = new ListView<String>();
 
         ObservableList<String> plats = FXCollections.observableArrayList(
@@ -65,15 +67,16 @@ public class App extends Application{
         );
         listePlats.setItems(plats);
 
-        VBox vbox = new VBox(label, listePlats);
+        VBox vbox = new VBox(10, label, listePlats);
         root.setRight(vbox);
 
         //Création de button
         Button btnTraiter = new Button("Traiter commande");
         Button btnAjouter = new Button("Ajouter un plat");
 
-        HBox hbox = new HBox(btnTraiter, btnAjouter);
+        HBox hbox = new HBox(10, btnTraiter, btnAjouter);
         root.setBottom(hbox);
+        hbox.setPadding(new Insets(10));
 
         //Creation de Service
         Brigade<Cuisinier> brigade = new Brigade<>("Service du soir");
