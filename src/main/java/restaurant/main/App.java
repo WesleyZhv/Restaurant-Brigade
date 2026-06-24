@@ -100,6 +100,19 @@ public class App extends Application{
             plats.add(nouveau.getNom() + "-" + nouveau.getStatut());
         });
 
+        //Creation d'une nouvelle colonnne
+        TableColumn<Cuisinier, String> role = new TableColumn("Rôle");
+        role.setCellValueFactory(data ->
+            new javafx.beans.property.SimpleStringProperty(
+                    data.getValue().getClass().getSimpleName()
+            ));
+
+        tableau.getColumns().add(role);
+
+        /* data.getValue() retourne l'objet Cuisinier de la ligne, et on appelle
+        getClass().getSimpleName() dessus pour avoir son type exact. */
+
+
 
 
 
