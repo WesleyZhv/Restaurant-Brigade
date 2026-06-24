@@ -78,6 +78,7 @@ public class App extends Application{
         Button btnTraiter = new Button("Traiter commande");
         Button btnAjouter = new Button("Ajouter un plat");
         Button btnConfirmer = new Button("Ajouter membre");
+        Button btnSupprimer = new Button("Supprimer membre");
 
         HBox hbox = new HBox(10, btnTraiter, btnAjouter);
         root.setBottom(hbox);
@@ -130,7 +131,7 @@ public class App extends Application{
         roleBox.getItems().addAll("ChefExecutif","SousChef","ChefDePartie","Commis");
         roleBox.setPromptText("Choisir un rôle");
 
-        HBox formulaire = new HBox(10, champPrenom, champNom, champPoste, roleBox, btnConfirmer);
+        HBox formulaire = new HBox(10, champPrenom, champNom, champPoste, roleBox, btnConfirmer, btnSupprimer);
         formulaire.setPadding(new Insets(10));
         root.setTop(formulaire);
 
@@ -163,6 +164,22 @@ public class App extends Application{
             champPoste.clear();
             roleBox.setValue(null);
                 });
+
+
+
+        btnSupprimer.setOnAction( e -> {
+            Cuisinier selectionne = tableau.getSelectionModel().getSelectedItem();
+
+            if(selectionne == null){
+            Alert alert1 = new Alert(Alert.AlertType.WARNING);
+            alert1.setTitle("Attention");
+            alert1.setHeaderText("Sélectionnez un membre à supprimer");
+            alert1.setContentText("Veuillez remplir tous les champs.");
+            alert1.showAndWait();
+        }else {
+              membres.remove(selectionne);
+        }});
+
 
 
 
