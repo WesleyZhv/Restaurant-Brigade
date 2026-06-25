@@ -22,35 +22,40 @@ Projet personnel réalisé dans le cadre d'une reconversion professionnelle (cui
 - **Exceptions métier custom** — `ServiceSurchargeException`, `PlatIndisponibleException`, `PersonnelAbsentException`
 - **Collections** — `ArrayList`, `Queue` (FIFO) via `LinkedList`, `ObservableList` JavaFX
 - **Enum** — `StatutPlat` (EN_ATTENTE, EN_COURS, PRET, ECHEC)
-- **Persistance JSON** — sérialisation/désérialisation avec Gson, gestion du polymorphisme via `RuntimeTypeAdapterFactory`
-- **Interface graphique JavaFX** — `TableView`, `ListView`, `BorderPane`, `VBox`, `HBox`, event handlers via lambdas
+- **Persistance JSON** — sérialisation/désérialisation avec Gson
+- **Interface graphique JavaFX** — `TableView`, `ListView`, `BorderPane`, `VBox`, `HBox`, `Alert`, `ComboBox`, `TextField`, fenêtres multiples, event handlers via lambdas
+- **Refactoring** — découpage en méthodes privées, attributs de classe, séparation des responsabilités
 - **Gestion de projet** — Maven, Git avec historique de commits progressif
 
 ---
 
 ## Architecture
 
+```
 src/main/java/
-
 ├── restaurant/
-
 │   ├── exception/        # Exceptions métier custom
-
 │   ├── main/             # Point d'entrée console (Main) + interface JavaFX (App)
-
 │   ├── model/
-
 │   │   ├── Brigade.java  # Classe générique Brigade<T extends Personnel>
-
 │   │   ├── personnel/    # Hiérarchie Personnel → Cuisinier/Manager → sous-classes
-
 │   │   ├── plat/         # Plat + enum StatutPlat
-
-│   │   └── service/      # Service avec file de commandes FIFO
-
+│   │   └── service/      # Service (Queue FIFO) + HistoriqueService
 │   └── storage/          # Persistance JSON via Gson
-
 └── com/google/gson/typeadapters/  # RuntimeTypeAdapterFactory (source officielle Google)
+```
+
+---
+
+## Fonctionnalités de l'interface
+
+- Tableau de bord avec brigade complète (Nom, Poste, Rôle hiérarchique détecté via `getClass().getSimpleName()`)
+- Formulaire d'ajout de cuisinier avec validation (TextField, ComboBox, Alert popup)
+- Suppression d'un membre sélectionné avec confirmation
+- Liste des plats en cours de service avec compteur en temps réel
+- Ajout de commandes et traitement FIFO via boutons
+- Fenêtre détails au double-clic sur un cuisinier (nouveau Stage)
+- Rapport de fin de service (plats traités, membres de la brigade, historique)
 
 ---
 
@@ -66,15 +71,4 @@ mvn javafx:run
 
 ---
 
-## Fonctionnalités de l'interface
-
-- Tableau de bord avec brigade complète (Nom, Poste, Rôle hiérarchique)
-- Formulaire d'ajout de cuisinier avec validation (TextField, ComboBox, Alert)
-- Suppression d'un membre sélectionné avec confirmation
-- Liste des plats en cours de service avec compteur en temps réel
-- Ajout de commandes et traitement FIFO via boutons
-- Fenêtre détails au double-clic sur un cuisinier (nouvelle Stage)
-- Rapport de fin de service (plats traités, membres de la brigade)
----
-
-*Projet en cours de développement — JavaFX Phase 3 active.*
+*Projet terminé — réalisé de A à Z en autonomie (guidée pour certaines tâches par claude IA).*
