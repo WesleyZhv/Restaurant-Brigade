@@ -26,6 +26,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
+import restaurant.model.service.HistoriqueService;
 
 public class App extends Application{
 
@@ -211,6 +212,8 @@ public class App extends Application{
             }
         });
 
+        HistoriqueService historique = new HistoriqueService();
+
         btnRapport.setOnAction(e ->{
            Stage stage1 = new Stage();
 
@@ -225,18 +228,21 @@ public class App extends Application{
 
            Label lMembre = new Label("Nombre de membres de la brigade : " + membres.size());
 
-           VBox rapportBox = new VBox(15, lNomService, lNombrePlatTraite, listePlatsTraites, lMembre );
+
+           Label lHistorique = new Label("Services effectués aujourd'hui : " + historique.getHistorique().size());
+
+
+           VBox rapportBox = new VBox(15, lNomService, lNombrePlatTraite, listePlatsTraites, lMembre, lHistorique );
            rapportBox.setPadding(new Insets(20));
 
             Scene rapportScene = new Scene(rapportBox, 350, 300);
             stage1.setTitle("Rapport de service");
             stage1.setScene(rapportScene);
             stage1.show();
-
-
+            historique.ajouterService(serv);
         });
 
-    stage.show();
+        stage.show();
     }
 
     public static void main(String[] args){
